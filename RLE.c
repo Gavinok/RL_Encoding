@@ -78,9 +78,65 @@ int main(int argc, char *argv[])
     /* check if encoding*/
     if ( !strcmp(argv[2], "e") ) {
 	encode(buffer); 
-	return 0;
     } else {
 	decode(buffer); 
-	return 0;
     }
+    return 0;
+}
+
+void encode( char buffer[] )
+{
+
+    int length = strlen(buffer); /* length of the given buffer */
+    char encoded_str[ length + 1 ];
+    char last_char = buffer[0];
+    printf("length is %d\n", length);
+    int sequence_counter = 0;
+    int encoded_str_pos = 0;
+    for (int i = 0; i <= length; ++i) {
+	if ( last_char == buffer[i]) {
+	    printf("last_char is %c\n", last_char);
+	    printf("matches last char\n");
+	    sequence_counter++; 
+	    printf("sequence_counter is %d\n", sequence_counter);
+	}else{
+	    /* add the next sequence to string */
+	    encoded_str[encoded_str_pos] = last_char;
+	    encoded_str[encoded_str_pos + 1] = (sequence_counter + '0');
+	    encoded_str_pos += 2;
+	    printf("encoded_str is %s\n", encoded_str);
+	    sequence_counter = 1;
+	    printf("sequence_counter is %d\n", sequence_counter);
+	}
+	    printf("i is %d\n", i);
+	    printf("sequence_counter is %d\n", sequence_counter);
+	    printf("encoded_str_pos is %d\n", encoded_str_pos);
+	last_char = buffer[i];
+    }
+    encoded_str[encoded_str_pos] = '\0';
+    printf("%s\n", encoded_str);
+
+    /* errors */
+    printf("Error: String could not be encoded\n");
+    exit(5);
+}
+
+void decode( char buffer[] )
+{
+    int length = strlen(buffer);
+    char encoded_str[ length + 1 ];
+    char last_char = '\0';
+    char place_holder = 0;
+    int sequence_counter = 0;
+    for (int i = 0; place_holder != '\0'; ++i) {
+	place_holder = buffer[i];
+	if ( last_char == place_holder) {
+	    sequence_counter++; 
+	}else{
+	    encoded_str[ i - sequence_counter ];
+	    sequence_counter = 0;
+	}
+	last_char = place_holder;
+    }
+    printf("%s\n", encoded_str);
 }
