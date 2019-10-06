@@ -6,22 +6,22 @@
 /* buffer needs to be 41 since we need and extra character for \0 */
 #define BUFFERSIZE 41
 
+void encode( char[] buffer, int size);
+void decode( char[] buffer, int size);
+
 int main(int argc, char *argv[])
 {
-    /*
-     * check for 2 commandline arguments
-     * check that the 2nd arg is either e or d
-     */
+    /* check for 2 commandline arguments
+     * check that the 2nd arg is either e or d */
     if ( (argc != 3)  || ((strcmp(argv[2], "e")) && (strcmp(argv[2], "d"))) ) {
 	fprintf(stderr,"Invalid Usage, expected: RLE {filename} [e | d]\n");
 	exit(4);
     }
-    /*
-     * ASK A QUESTION ABOUT 
+
+    /* ASK A QUESTION ABOUT 
      * i.  If there is no filename specified: 
      *	    1.  print “Error: No input file specified!” to the console 
-     *	    2.  terminate the program with exit code 1. 
-     */
+     *	    2.  terminate the program with exit code 1.  */
 
     /* OPEN FILE  */
     const char *filename = argv[1];
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 
     /* printf("isupper for 1 is %d\n", isupper('1')); */
     int i = 0;
-    while (i <= length) {
+    while ( i <= length ) {
 	place_holder = fgetc(file_pointer); 
 	if ( place_holder == EOF ){
 	    buffer[i] = '\0';
@@ -53,10 +53,10 @@ int main(int argc, char *argv[])
 	} else { 
 	    printf("non digit of uppercase letter found");
 	    /* make sure the rest of the fomating is correct*/
-	    while (place_holder != EOF) {
+	    while ( place_holder != EOF ) {
 		/* if the the next char from the file is 
 		 * not whitespace or the formatting is Invalid*/
-		if (place_holder != ' ') {
+		if ( place_holder != ' ' ) {
 		    /* formatting is incorrect so exit program */
 		    printf("Error: Invalid format\n");
 		    exit(3);
@@ -72,5 +72,14 @@ int main(int argc, char *argv[])
     fclose(file_pointer);
     /* FILE IS NOW CLOSED */
     /* STRING FROM FILE IS NOW STORED IN BUFFER*/
-    return 0;
-}
+
+    /* check if encoding*/
+    if ( argv[2] == "e" ) {
+	encode(buffer); 
+	return 0;
+    } else {
+	decode(buffer); 
+	return 0;
+    }
+    /* since we are not encoding we are decoding
+       }
