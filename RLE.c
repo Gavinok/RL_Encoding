@@ -3,6 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
+#define BUFFERSIZE 41
 int main(int argc, char *argv[])
 {
     /*
@@ -20,20 +21,19 @@ int main(int argc, char *argv[])
      *	    2.  terminate the program with exit code 1. 
      */
 
-    /* open file  */
+    /* OPEN FILE  */
     const char *filename = argv[1];
     FILE *file_pointer = fopen(filename, "r");
     if (file_pointer == NULL) {
 	fprintf(stderr, "Read error: file not found or cannot be read\n");
 	exit(2);
     }
-    /* File is now open */
+    /* FILE IS NOW OPEN */
 
-    //buffer needs to be 41 since we need and extra character for \0
-    char buffer[41]; //buffer for storing the string from the file 
-    char place_holder; //char used to hold the current character for checking its value
-    /* int length = sizeof(buffer); */
-    int length = 41;
+    /* buffer needs to be 41 since we need and extra character for \0 */
+    char buffer[BUFFERSIZE]; /* buffer for storing the string from the file  */
+    char place_holder; /* char used to hold the current character for checking its value */
+    int length = BUFFERSIZE;
 
     /* printf("isupper for 1 is %d\n", isupper('1')); */
     int i = 0;
@@ -56,6 +56,7 @@ int main(int argc, char *argv[])
 		/* if the the next char from the file is 
 		 * not whitespace or the formatting is Invalid*/
 		if (place_holder != ' ') {
+		    /* formatting is incorrect so exit program */
 		    printf("Error: Invalid format\n");
 		    exit(3);
 		}
@@ -68,8 +69,7 @@ int main(int argc, char *argv[])
 	printf("i is %d\n", i);
     }
     fclose(file_pointer);
-    /* File is now closed */
-
-    /* string from file is now stored in buffer*/
+    /* FILE IS NOW CLOSED */
+    /* STRING FROM FILE IS NOW STORED IN BUFFER*/
     return 0;
 }
