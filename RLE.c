@@ -3,7 +3,9 @@
 #include <string.h>
 #include <ctype.h>
 
+/* buffer needs to be 41 since we need and extra character for \0 */
 #define BUFFERSIZE 41
+
 int main(int argc, char *argv[])
 {
     /*
@@ -30,7 +32,6 @@ int main(int argc, char *argv[])
     }
     /* FILE IS NOW OPEN */
 
-    /* buffer needs to be 41 since we need and extra character for \0 */
     char buffer[BUFFERSIZE]; /* buffer for storing the string from the file  */
     char place_holder; /* char used to hold the current character for checking its value */
     int length = BUFFERSIZE;
