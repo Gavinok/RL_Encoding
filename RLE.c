@@ -74,12 +74,11 @@ int main(int argc, char *argv[])
     /* STRING FROM FILE IS NOW STORED IN BUFFER*/
 
     /* check if encoding*/
-    if ( argv[2] == "e" ) {
+    if ( !strcmp(argv[2], "e") ) {
 	encode(buffer); 
 	return 0;
     } else {
 	decode(buffer); 
 	return 0;
     }
-    /* since we are not encoding we are decoding
-       }
+}
