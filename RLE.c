@@ -39,45 +39,37 @@ int main(int argc, char *argv[])
     int i = 0;
     while (i <= length) {
 	place_holder = fgetc(file_pointer); 
+	if ( place_holder == EOF ){
+	    buffer[i] = '\0';
+	    printf("break\n");
+	    printf("buffer is %s\n", buffer);
+	    break; 
+	}
 	printf("place_holder is %c\n", place_holder);
 	if ( isupper(place_holder) || isdigit(place_holder) ){
 	    buffer[i] = place_holder;
 	    i++;
-	} else if ( place_holder != ' ' ){
-	    /* white space found */
-	    printf("white space found %c\n", place_holder);
-	    while ( place_holder != EOF ){
-		if (place_holder != ' ') { //TODO remove redundent check here
-		/* non Whitespace folloing white space found */
+	} else { 
+	    printf("non digit of uppercase letter found");
+	    /* make sure the rest of the fomating is correct*/
+	    while (place_holder != EOF) {
+		/* if the the next char from the file is 
+		 * not whitespace or the formatting is Invalid*/
+		if (place_holder != ' ') {
 		    printf("Error: Invalid format\n");
 		    exit(3);
 		}
 		place_holder = fgetc(file_pointer); 
 	    }
-	} else {
-	    /* non white or digit or uppercase */
-	    printf("non white or digit or uppercase %c\n", place_holder);
-	    printf("Error: Invalid format\n");
-	    exit(3);
-	}
-
-	if ( place_holder == EOF ){
 	    buffer[i] = '\0';
-	    printf("break\n");
-	    break; 
+	    break; /* formatting is correct so exit loop */
 	}
-	printf("buffer isa %s\n", buffer);
+	printf("buffer is %s\n", buffer);
 	printf("i is %d\n", i);
     }
-    /* if(file_pointer) */
-    /* { */
-    /* fread (buffer, 1, length, file_pointer); */
-    /* } */
     fclose(file_pointer);
-    printf("failed to parse file");
-
-
-    fclose(file_pointer);  /* There is a little bug in the loop! */
     /* File is now closed */
+
+    /* string from file is now stored in buffer*/
     return 0;
 }
