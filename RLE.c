@@ -53,13 +53,11 @@ int main(int argc, char *argv[])
 	    buffer[i] = place_holder;
 	    i++;
 	} else { 
-	    printf("non digit of uppercase letter found");
 	    /* make sure the rest of the fomating is correct*/
+	    printf("make sure the rest of the fomating is correct\n");
 	    while ( place_holder != EOF ) {
-		/* if the the next char from the file is 
-		 * not whitespace or the formatting is Invalid*/
-		if ( place_holder != ' ' ) {
-		    /* formatting is incorrect so exit program */
+		if ( !isspace(place_holder) ) {
+		    printf("place_holder is not Whitespace it is %c\n", place_holder);
 		    printf("Error: Invalid format\n");
 		    exit(3);
 		}
