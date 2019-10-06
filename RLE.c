@@ -5,10 +5,12 @@
 
 /* buffer needs to be 41 since we need and extra character for \0 */
 #define BUFFERSIZE 41
+#define DEBUG
 
-void encode( char[] buffer, int size);
-void decode( char[] buffer, int size);
+void encode( char buffer[] );
+void decode( char buffer[] );
 
+/* TODO ask if we can use seperate functions to make main more readable*/
 int main(int argc, char *argv[])
 {
     /* check for 2 commandline arguments
@@ -18,7 +20,7 @@ int main(int argc, char *argv[])
 	exit(4);
     }
 
-    /* ASK A QUESTION ABOUT 
+    /* TODO ASK A QUESTION ABOUT 
      * i.  If there is no filename specified: 
      *	    1.  print “Error: No input file specified!” to the console 
      *	    2.  terminate the program with exit code 1.  */
