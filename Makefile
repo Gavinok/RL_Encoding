@@ -1,8 +1,7 @@
 CC = gcc
-SOURCE = RLE.c
-BINARY= RLE
-CFLAGS = -Wall -Wextra
+TARGET = RLE
+CFLAGS = -std=c99 -Wall -Wextra
 
-RLE: RLE.c
-	$(CC) -o $(BINARY) $(SOURCE) $(CFLAGS)
+all:
+	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c 
 
