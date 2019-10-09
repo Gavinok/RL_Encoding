@@ -1,6 +1,6 @@
 CC = gcc
 TARGET = RLE
-CFLAGS = -std=c99 -Wall -Wextra
+CFLAGS = -std=c99 -g -Wall -Wextra
 
 all:
 	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c 
