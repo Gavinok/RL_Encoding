@@ -48,20 +48,20 @@ int main(int argc, char *argv[])
 				place_holder = fgetc(file_pointer); 
 				if ( place_holder == EOF ){
 						buffer[i] = '\0';
-						printf("break\n");
-						printf("buffer is %s\n", buffer);
+						/* printf("break\n"); */
+						/* printf("buffer is %s\n", buffer); */
 						break; 
 				}
-				printf("place_holder is %c\n", place_holder);
+				/* printf("place_holder is %c\n", place_holder); */
 				if ( isupper(place_holder) || isdigit(place_holder) ){
 						buffer[i] = place_holder;
 						i++;
 				} else { 
 						/* make sure the rest of the fomating is correct*/
-						printf("make sure the rest of the fomating is correct\n");
+						/* printf("make sure the rest of the fomating is correct\n"); */
 						while ( place_holder != EOF ) {
 								if ( !isspace(place_holder) ) {
-										printf("place_holder is not Whitespace it is %c\n", place_holder);
+										/* printf("place_holder is not Whitespace it is %c\n", place_holder); */
 										printf("Error: Invalid format\n");
 										exit(3);
 								}
@@ -70,8 +70,8 @@ int main(int argc, char *argv[])
 						buffer[i] = '\0';
 						break; /* formatting is correct so exit loop */
 				}
-				printf("buffer is %s\n", buffer);
-				printf("i is %d\n", i);
+				/* printf("buffer is %s\n", buffer); */
+				/* printf("i is %d\n", i); */
 		}
 		fclose(file_pointer);
 		/* FILE IS NOW CLOSED */
@@ -94,30 +94,38 @@ void encode( char buffer[] )
 		char encoded_str[ length + 1 ]; /* resulting string */
 		char last_char = buffer[0];	    /* last char spotted in original string*/
 		for (int i = 0; i <= length; ++i) {
-				/* print error if the sequence is a double digit 
-				 * or contains a non alpha */
-				if (( sequence_counter <= 10 ) && ( !isalpha(last_char) )) { 
-						printf("sequence_counter is %d\n", sequence_counter);
+				/* ensure that the chars are all appropriate letters*/
+				switch (last_char) {
+					case 'A':
+						break;
+					case 'C':
+						break;
+					case 'T':
+						break;
+					case 'G':
+						break;
+					default:
 						printf("Error: String could not be encoded\n");
 						exit(5);
+						
 				}
 				if ( last_char == buffer[i]) {
-						printf("last_char is %c\n", last_char);
-						printf("matches last char\n");
+						/* printf("last_char is %c\n", last_char); */
+						/* printf("matches last char\n"); */
 						sequence_counter++; 
-						printf("sequence_counter is %d\n", sequence_counter);
+						/* printf("sequence_counter is %d\n", sequence_counter); */
 				} else {
 						/* add the next sequence to string */
 						encoded_str[encoded_str_pos] = last_char;
 						encoded_str[encoded_str_pos + 1] = (sequence_counter + '0');
 						encoded_str_pos += 2;
-						printf("encoded_str is %s\n", encoded_str);
+						/* printf("encoded_str is %s\n", encoded_str); */
 						sequence_counter = 1;
-						printf("sequence_counter is %d\n", sequence_counter);
+						/* printf("sequence_counter is %d\n", sequence_counter); */
 				}
-				printf("i is %d\n", i);
-				printf("sequence_counter is %d\n", sequence_counter);
-				printf("encoded_str_pos is %d\n", encoded_str_pos);
+				/* printf("i is %d\n", i); */
+				/* printf("sequence_counter is %d\n", sequence_counter); */
+				/* printf("encoded_str_pos is %d\n", encoded_str_pos); */
 				last_char = buffer[i];
 		}
 		encoded_str[encoded_str_pos] = '\0';
@@ -132,31 +140,45 @@ void decode( char buffer[] )
 		char last_char = '0';	    /* last char spotted in original string*/
 		for (int i = 0; buffer[i] != '\0'; ++i) {
 				if ( isalpha(buffer[i]) && isdigit(last_char) ) {
-						printf("alpha found\n");
-						printf("buffer[i] is %c\n", buffer[i]);
+						switch (buffer[i]) {
+							case 'A':
+								break;
+							case 'C':
+								break;
+							case 'T':
+								break;
+							case 'G':
+								break;
+							default:
+								printf("Error: String could not be decoded\n");
+								exit(5);
+								
+						}
+						/* printf("alpha found\n"); */
+						/* printf("buffer[i] is %c\n", buffer[i]); */
 						last_char = buffer[i]; 
 				} else if ( isdigit(buffer[i]) && isalpha(last_char)) {
-						printf("digit found\n");
-						printf("buffer[i] is %c\n", buffer[i]);
+						/* printf("digit found\n"); */
+						/* printf("buffer[i] is %c\n", buffer[i]); */
 						for (int j = 0; j < ( buffer[i] - '0' ); j++) {
-								printf("j is %d\n", j);
-								printf("buffer[i] is %c\n", buffer[i]);
+								/* printf("j is %d\n", j); */
+								/* printf("buffer[i] is %c\n", buffer[i]); */
 								decoded_str[decoded_str_pos] = last_char;
 								decoded_str[decoded_str_pos + 1] = '\0';
-								printf("last_char is %c\n", last_char);
-								printf("decoded_str is %s\n", decoded_str);
+								/* printf("last_char is %c\n", last_char); */
+								/* printf("decoded_str is %s\n", decoded_str); */
 								decoded_str_pos++;
 						}
 						last_char = buffer[i];
-						printf("digits finished\n");
+						/* printf("digits finished\n"); */
 				} else {
 
 								printf("Error: String could not be decoded\n");
 								exit(5);
 				}
-				printf("i is %d\n", i);
-				printf("decoded_str_pos is %d\n", decoded_str_pos);
-				printf("decoded_str is %s\n", decoded_str);
+				/* printf("i is %d\n", i); */
+				/* printf("decoded_str_pos is %d\n", decoded_str_pos); */
+				/* printf("decoded_str is %s\n", decoded_str); */
 				last_char = buffer[i];
 		}
 		decoded_str[decoded_str_pos] = '\0';
