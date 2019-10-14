@@ -100,16 +100,17 @@ void encode( char buffer[] )
 						sequence_counter++; 
 						printf("sequence_counter is %d\n", sequence_counter);
 				}else{
+						/* print error if the sequence is a double digit 
+						 * or contains a non alpha */
+						if (( sequence_counter <= 10 ) && ( isalpha(last_char) )) { 
+								printf("Error: String could not be encoded\n");
+								exit(5);
+						}
 						/* add the next sequence to string */
 						encoded_str[encoded_str_pos] = last_char;
 						encoded_str[encoded_str_pos + 1] = (sequence_counter + '0');
 						encoded_str_pos += 2;
 						printf("encoded_str is %s\n", encoded_str);
-						/* print error if the sequence is a double digit*/
-						if (sequence_counter <= 10) { 
-								printf("Error: String could not be encoded\n");
-								exit(5);
-						}
 						sequence_counter = 1;
 						printf("sequence_counter is %d\n", sequence_counter);
 				}
@@ -131,8 +132,8 @@ void decode( char buffer[] )
 {
 		int length = strlen(buffer);    /* length of the given buffer */
 		int sequence_counter = 0;	    /* keeps track of the repeated characters */
-		int encoded_str_pos = 0;	    /* keeps track of the resulting string position */
-		char encoded_str[ length + 1 ]; /* resulting string */
+		int decoded_str_pos = 0;	    /* keeps track of the resulting string position */
+		char decoded_str [ length + 1 ]; /* resulting string */
 		char last_char = buffer[0];	    /* last char spotted in original string*/
 		for (int i = 0; i <= length; ++i) {
 				if ( last_char == buffer[i]) {
