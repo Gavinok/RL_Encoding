@@ -138,22 +138,22 @@ void decode( char buffer[] )
 						printf("sequence_counter is %d\n", sequence_counter);
 				}else{
 						/* add the next sequence to string */
-						encoded_str[encoded_str_pos] = last_char;
-						encoded_str[encoded_str_pos + 1] = (sequence_counter + '0');
-						encoded_str_pos += 2;
-						printf("encoded_str is %s\n", encoded_str);
+						decoded_str[decoded_str_pos] = last_char;
+						decoded_str[decoded_str_pos + 1] = (sequence_counter + '0');
+						decoded_str_pos += 2;
+						printf("decoded_str is %s\n", decoded_str);
 						sequence_counter = 1;
 						printf("sequence_counter is %d\n", sequence_counter);
 				}
 				printf("i is %d\n", i);
 				printf("sequence_counter is %d\n", sequence_counter);
-				printf("encoded_str_pos is %d\n", encoded_str_pos);
+				printf("decoded_str_pos is %d\n", decoded_str_pos);
 				last_char = buffer[i];
 		}
-		encoded_str[encoded_str_pos] = '\0';
-		printf("%s\n", encoded_str);
+		decoded_str[decoded_str_pos] = '\0';
+		printf("%s\n", decoded_str);
 
 		/* errors */
-		printf("Error: String could not be encoded\n");
+		printf("Error: String could not be decoded\n");
 		exit(5);
 }
