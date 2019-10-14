@@ -3,6 +3,10 @@
 #include <string.h>
 #include <ctype.h>
 
+/* The encoded string must at most contain half digits and half alphas.
+ * the digits have a maximum of 9. 9*20 is 180 ( chars in a sequence ), 
+ * and with the extra 20 alphas an extra for the \0 we get 201 */
+#define MAX_DECODEDSIZE 201
 /* buffer needs to be 41 since we need and extra character for \0 */
 #define BUFFERSIZE 41
 #define DEBUG
