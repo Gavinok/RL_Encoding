@@ -6,13 +6,14 @@
 /* The encoded string must at most contain half digits and half alphas.
  * the digits have a maximum of 9. 9*20 is 180 ( chars in a sequence ),
  * and with the extra 20 alphas an extra for the \0 we get 201 */
-#define MAX_DECODEDSIZE 201
+#define MAX_DECODED_SIZE 201
 /* buffer needs to be 41 since we need and extra character for \0 */
 #define BUFFERSIZE 41
 #define DEBUG
 
 void encode( char buffer[] );
 void decode( char buffer[] );
+int isvalid( char letter );	/* check that the letter is valid for encodeing and decoding*/
 
 int main(int argc, char *argv[])
 {
@@ -76,6 +77,22 @@ int main(int argc, char *argv[])
 		return 0;
 }
 
+/* check that the letter is valid for encodeing and decoding*/
+int isvalid( char letter ){
+		switch ( letter ) {
+			case 'A':
+				return 1;
+			case 'C':
+				return 1;
+			case 'T':
+				return 1;
+			case 'G':
+				return 1;
+			default:
+				return 0;
+		}
+}
+
 void encode( char buffer[] )
 {
 		int length = strlen(buffer);    /* length of the given buffer */
@@ -84,17 +101,7 @@ void encode( char buffer[] )
 		char encoded_str[ length + 1 ]; /* resulting string */
 		char last_char = buffer[0];	    /* last char spotted in original string*/
 		for (int i = 0; i <= length; ++i) {
-				/* ensure that the chars are all valid letters */
-				switch ( last_char ) {
-					case 'A':
-						break;
-					case 'C':
-						break;
-					case 'T':
-						break;
-					case 'G':
-						break;
-					default:
+				if ( !isvalid(last_char) ) {
 						printf("Error: String could not be encoded\n");
 						exit(5);
 				}
@@ -113,27 +120,14 @@ void encode( char buffer[] )
 		printf("%s\n", encoded_str);
 }
 
+
 void decode( char buffer[] )
 {
 		int decoded_str_pos = 0;	    /* keeps track of the resulting string position */
-		char decoded_str [ MAX_DECODEDSIZE ]; /* resulting string */
+		char decoded_str [ MAX_DECODED_SIZE ]; /* resulting string */
 		char last_char = '0';	    /* last char spotted in original string*/
 		for (int i = 0; buffer[i] != '\0'; ++i) {
-				if ( isalpha(buffer[i]) && isdigit(last_char) ) {
-						/* check that the letter is valid */
-						switch (buffer[i]) {
-							case 'A':
-								break;
-							case 'C':
-								break;
-							case 'T':
-								break;
-							case 'G':
-								break;
-							default:
-								printf("Error: String could not be decoded\n");
-								exit(5);
-						}
+				if ( isalpha(buffer[i]) && isvalid(buffer[i]) && isdigit(last_char)  ) {
 						last_char = buffer[i];
 				} else if ( isdigit(buffer[i]) && isalpha(last_char)) {
 						/* add the sequence to the string */
