@@ -139,8 +139,7 @@ void decode( char buffer[] )
 						last_char = buffer[i];
 				} else {
 						/* the this the string is invalid and does not follow
-						 * the expected order eg A23B... a digit cannot follow
-						 * a digit*/
+						 * the expected order */
 						printf("Error: String could not be decoded\n");
 						exit(5);
 				}
