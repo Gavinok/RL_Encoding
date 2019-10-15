@@ -13,7 +13,7 @@
 
 void encode( char buffer[] );
 void decode( char buffer[] );
-int isvalid( char letter );	/* check that the letter is valid for encodeing and decoding*/
+int isvalid( char letter );	
 
 int main(int argc, char *argv[])
 {
@@ -77,8 +77,9 @@ int main(int argc, char *argv[])
 		return 0;
 }
 
-/* check that the letter is valid for encodeing and decoding*/
-int isvalid( char letter ){
+/* check that the letter is valid for encodeing and decoding */
+int isvalid( char letter )
+{
 		switch ( letter ) {
 			case 'A':
 				return 1;
@@ -119,7 +120,6 @@ void encode( char buffer[] )
 		encoded_str[encoded_str_pos] = '\0';
 		printf("%s\n", encoded_str);
 }
-
 
 void decode( char buffer[] )
 {
