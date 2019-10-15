@@ -31,9 +31,14 @@ int main(int argc, char *argv[])
 
 		/* OPEN FILE  */
 		const char *filename = argv[1];
+		/* check if the filename is completely empty*/
+		if ( !strcmp(filename, "") ) {
+				printf("Error: No input file specified!\n");
+				exit(1);
+		}
 		FILE *file_pointer = fopen(filename, "r");
 		if (file_pointer == NULL) {
-				fprintf(stderr, "Read error: file not found or cannot be read\n");
+				printf("Read error: file not found or cannot be read\n");
 				exit(2);
 		}
 		/* FILE IS NOW OPEN */
