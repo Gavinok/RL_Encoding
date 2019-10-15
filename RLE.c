@@ -81,16 +81,16 @@ int main(int argc, char *argv[])
 int isvalid( char letter )
 {
 		switch ( letter ) {
-			case 'A':
-				return 1;
-			case 'C':
-				return 1;
-			case 'T':
-				return 1;
-			case 'G':
-				return 1;
-			default:
-				return 0;
+				case 'A':
+						return 1;
+				case 'C':
+						return 1;
+				case 'T':
+						return 1;
+				case 'G':
+						return 1;
+				default:
+						return 0;
 		}
 }
 
