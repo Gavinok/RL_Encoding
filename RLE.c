@@ -14,7 +14,6 @@
 void encode( char buffer[] );
 void decode( char buffer[] );
 
-/* TODO ask if we can use seperate functions to make main more readable*/
 int main(int argc, char *argv[])
 {
 		/* check for 2 commandline arguments
@@ -23,11 +22,6 @@ int main(int argc, char *argv[])
 				fprintf(stderr,"Invalid Usage, expected: RLE {filename} [e | d]\n");
 				exit(4);
 		}
-
-		/* TODO ASK A QUESTION ABOUT 
-		 * i.  If there is no filename specified: 
-		 *	    1.  print “Error: No input file specified!” to the console 
-		 *	    2.  terminate the program with exit code 1.  */
 
 		/* OPEN FILE  */
 		const char *filename = argv[1];
@@ -137,7 +131,6 @@ void encode( char buffer[] )
 		printf("%s\n", encoded_str);
 }
 
-/* TODO: complete decode */
 void decode( char buffer[] )
 {
 		int decoded_str_pos = 0;	    /* keeps track of the resulting string position */
