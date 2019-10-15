@@ -4,7 +4,7 @@
 #include <ctype.h>
 
 /* The encoded string must at most contain half digits and half alphas.
- * the digits have a maximum of 9. 9*20 is 180 ( chars in a sequence ), 
+ * the digits have a maximum of 9. 9*20 is 180 ( chars in a sequence ),
  * and with the extra 20 alphas an extra for the \0 we get 201 */
 #define MAX_DECODEDSIZE 201
 /* buffer needs to be 41 since we need and extra character for \0 */
@@ -36,29 +36,28 @@ int main(int argc, char *argv[])
 				exit(2);
 		}
 		/* FILE IS NOW OPEN */
-
 		char buffer[BUFFERSIZE]; /* buffer for storing the string from the file  */
 		char place_holder; /* char used to hold the current character for checking its value */
 		int length = BUFFERSIZE;
 
 		int i = 0;
 		while ( i <= length ) {
-				place_holder = fgetc(file_pointer); 
+				place_holder = fgetc(file_pointer);
 				if ( place_holder == EOF ){
 						buffer[i] = '\0';
-						break; 
+						break;
 				}
 				if ( isupper(place_holder) || isdigit(place_holder) ){
 						buffer[i] = place_holder;
 						i++;
-				} else { 
+				} else {
 						/* make sure the rest of the fomating is correct*/
 						while ( place_holder != EOF ) {
 								if ( !isspace(place_holder) ) {
 										printf("Error: Invalid format\n");
 										exit(3);
 								}
-								place_holder = fgetc(file_pointer); 
+								place_holder = fgetc(file_pointer);
 						}
 						buffer[i] = '\0';
 						break; /* formatting is correct so exit loop */
@@ -68,11 +67,11 @@ int main(int argc, char *argv[])
 		/* FILE IS NOW CLOSED */
 		/* STRING FROM FILE IS NOW STORED IN BUFFER*/
 
-		/* check if encoding*/
+		/* Check If Encoding*/
 		if ( !strcmp(argv[2], "e") ) {
-				encode(buffer); 
+				encode(buffer);
 		} else {
-				decode(buffer); 
+				decode(buffer);
 		}
 		return 0;
 }
@@ -85,8 +84,8 @@ void encode( char buffer[] )
 		char encoded_str[ length + 1 ]; /* resulting string */
 		char last_char = buffer[0];	    /* last char spotted in original string*/
 		for (int i = 0; i <= length; ++i) {
-				/* ensure that the chars are all appropriate letters*/
-				switch (last_char) {
+				/* ensure that the chars are all valid letters */
+				switch ( last_char ) {
 					case 'A':
 						break;
 					case 'C':
@@ -98,10 +97,9 @@ void encode( char buffer[] )
 					default:
 						printf("Error: String could not be encoded\n");
 						exit(5);
-						
 				}
-				if ( last_char == buffer[i]) {
-						sequence_counter++; 
+				if ( last_char == buffer[i] ) {
+						sequence_counter++;
 				} else {
 						/* add the next sequence to string */
 						encoded_str[encoded_str_pos] = last_char;
@@ -135,9 +133,8 @@ void decode( char buffer[] )
 							default:
 								printf("Error: String could not be decoded\n");
 								exit(5);
-								
 						}
-						last_char = buffer[i]; 
+						last_char = buffer[i];
 				} else if ( isdigit(buffer[i]) && isalpha(last_char)) {
 						/* add the sequence to the string */
 						for (int j = 0; j < ( buffer[i] - '0' ); j++) {
@@ -147,8 +144,9 @@ void decode( char buffer[] )
 						}
 						last_char = buffer[i];
 				} else {
-						/* the this the string is invalid and does not follow 
-						 * the expected order*/
+						/* the this the string is invalid and does not follow
+						 * the expected order eg A23B... a digit cannot follow
+						 * a digit*/
 						printf("Error: String could not be decoded\n");
 						exit(5);
 				}
