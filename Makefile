@@ -1,6 +1,6 @@
 CC = gcc
 TARGET = RLE
-CFLAGS = -std=c99 -g -Wall -pedantic -Wextra
+CFLAGS = 
 
 all: RLE
 
