@@ -101,7 +101,8 @@ void encode( char buffer[] )
 	int encoded_str_pos = 0;	    /* keeps track of the resulting string position */
 	char encoded_str[ length + 1 ]; /* resulting string */
 	char last_char = buffer[0];	    /* last char spotted in original string*/
-	for (int i = 0; i <= length; ++i) {
+	int i;
+	for ( i = 0; i <= length; ++i) {
 		if ( !isvalid(last_char) ) {
 			printf("Error: String could not be encoded\n");
 			exit(5);
@@ -126,12 +127,14 @@ void decode( char buffer[] )
 	int decoded_str_pos = 0;	    /* keeps track of the resulting string position */
 	char decoded_str [ MAX_DECODED_SIZE ]; /* resulting string */
 	char last_char = '0';	    /* last char spotted in original string*/
-	for (int i = 0; buffer[i] != '\0'; ++i) {
+	int i;
+	for ( i = 0; buffer[i] != '\0'; ++i) {
 		if ( isalpha(buffer[i]) && isvalid(buffer[i]) && isdigit(last_char)  ) {
 			last_char = buffer[i];
 		} else if ( isdigit(buffer[i]) && isalpha(last_char)) {
 			/* add the sequence to the string */
-			for (int j = 0; j < ( buffer[i] - '0' ); j++) {
+			int j;
+			for ( j = 0; j < ( buffer[i] - '0' ); j++) {
 				decoded_str[decoded_str_pos] = last_char;
 				decoded_str[decoded_str_pos + 1] = '\0';
 				decoded_str_pos++;
